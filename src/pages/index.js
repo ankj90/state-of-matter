@@ -1,29 +1,73 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
-
+import React from "react"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
+const Index = () => {
+  return (
+    <Layout
+      header={<HeaderContent />}
+      sidebar={<SidebarContent />}
+      body={<BodyContent />}
     />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </p>
-  </Layout>
-)
+  )
+}
 
-export default IndexPage
+const HeaderContent = () => {
+  return (
+    <>
+      <h1 className="text-6xl">Issue 1</h1>
+      <span className="text-2xl">March 2021</span>
+      <span className="text-2xl">Edited By: Ayush Mukherjee</span>
+    </>
+  )
+}
+
+const SidebarContent = () => {
+  return (
+    <div className="text-4xl">
+      <div className="py-10 text-custom-red">Fiction</div>
+      <div className="py-10">Non Fiction</div>
+      <div className="py-10">Poetry</div>
+    </div>
+  )
+}
+
+const BodyContent = () => {
+  return (
+    <div className="border-t border-gray-400">
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+    </div>
+  )
+}
+
+const Post = () => {
+  return (
+    <div className="flex flex-col xl:flex-row xl:items-center justify-between px-10 xl:px-16 py-5 border-b border-gray-400">
+      <div className="flex flex-col">
+        <h2 className="text-4xl">A Spaceship named Becky</h2>
+        <div className="flex items-center py-1 font-sub">
+          <span className="border-gray-700 border-r pr-3">Fiction</span>
+          <span className="px-3">Suchitra Sukumar</span>
+          <span className="border-gray-700 border-l pl-3">India</span>
+        </div>
+      </div>
+      <div className="flex flex-col xl:pl-20">
+        <div className="flex items-center py-1 font-sub">
+          <span className="border-gray-700 border-r pr-3">Science Fiction</span>
+          <span className="px-3">Adventure</span>
+          <span className="border-gray-700 border-l pl-3">Aliens</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Index;

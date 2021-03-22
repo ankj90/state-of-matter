@@ -1,42 +1,14 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import React from 'react';
+import { StaticImage } from "gatsby-plugin-image"
+// import Image from 'next/image';
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+const Header = ({ content }) => {
+  return (
+    <header className="relative overflow-hidden flex-shrink-0 text-white">
+      <div className="p-12 flex flex-col z-10 relative">{content}</div>
+      <StaticImage src="../images/header-bg.png" alt="Header Background Image" className="absolute inset-0 h-full w-full object-cover z-0" />
+    </header>
+  );
+};
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Header;

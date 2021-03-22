@@ -1,55 +1,29 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React from "react"
 
 import Header from "./header"
-import "./layout.css"
+import Body from "./body"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
+const Layout = ({ children, header, sidebar, body }) => {
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
+    <div className="flex">
+      <div className="font-serif h-screen w-24">
+        <div style={{ height: "50%" }} className="bg-custom-lightgray"></div>
+        <div style={{ height: "50%" }} className="bg-custom-darkblue"></div>
       </div>
-    </>
+      <div className="h-screen w-full flex flex-col overflow-y-auto">
+        <Header content={header} />
+        <Body sidebar={sidebar} body={body} />
+      </div>
+    </div>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+const RotatedText = () => {
+  return (
+    <div className="pt-10">
+      <h1 className="rotate-text">State Of Matter</h1>
+    </div>
+  )
 }
 
 export default Layout
