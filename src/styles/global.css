@@ -7,3 +7,7 @@
 html {
     scroll-behavior: smooth;
   }
+
+a {
+    @apply text-custom-red;
+}
