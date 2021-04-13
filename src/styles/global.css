@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Josefin+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Josefin+Slab&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,4 +10,8 @@ html {
 
 a {
     @apply text-custom-red;
+}
+
+p {
+  @apply font-sub;
 }
