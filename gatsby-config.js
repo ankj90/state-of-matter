@@ -19,6 +19,14 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: `c9ar0vgq`,
+        dataset: `production`,
+        token: process.env.SANITY_TOKEN,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,

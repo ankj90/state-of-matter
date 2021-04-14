@@ -1,26 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Josefin+Slab&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Josefin+Slab&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
-    scroll-behavior: smooth;
-    @apply font-sans;
-  }
+  scroll-behavior: smooth;
+  @apply font-sans;
+}
 
 a {
-    @apply text-custom-red;
+  @apply text-custom-red;
 }
 
 p {
   @apply font-sans;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-heading;
 }
 
 .absolute-important {
   @apply absolute !important;
+}
+
+.paragraphs p {
+  @apply py-3;
+}
+
+ul {
+  @apply list-inside list-disc !important;
+ }
+
+ol {
+  @apply list-inside list-decimal !important;
 }

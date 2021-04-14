@@ -13,8 +13,6 @@ const Header = ({ content }) => {
       <StaticImage
         src="../images/tree-bg.png"
         alt="Header Background Image"
-        width="full"
-        height="full"
         className="h-full w-full object-cover z-0 absolute-important inset-0"
       ></StaticImage>
     </header>

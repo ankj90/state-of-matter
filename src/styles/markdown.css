@@ -1,0 +1,270 @@
+/* Based on : https://github.com/simonlc/Markdown-CSS */
+
+.markdown {
+	 line-height: 1.5em;
+}
+ .markdown a {
+	 color: #0645ad;
+	 text-decoration: none;
+}
+ .markdown a:visited {
+	 color: #0b0080;
+}
+ .markdown a:hover {
+	 color: #06e;
+	 outline: 0;
+}
+ .markdown a:active {
+	 color: #faa700;
+	 outline: 0;
+}
+ .markdown a:focus {
+	 outline: thin dotted;
+}
+ .markdown a::-moz-selection {
+	 background: rgba(255, 255, 0, 0.3);
+	 color: #0645ad;
+}
+ .markdown a::selection {
+	 background: rgba(255, 255, 0, 0.3);
+	 color: #0645ad;
+}
+ .markdown::-moz-selection {
+	 background: rgba(255, 255, 0, 0.3);
+	 color: #000;
+}
+ .markdown::selection {
+	 background: rgba(255, 255, 0, 0.3);
+	 color: #000;
+}
+ .markdown p {
+	 margin: 1em 0;
+}
+ .markdown img {
+	 max-width: 100%;
+	 border: 0;
+	 -ms-interpolation-mode: bicubic;
+	 vertical-align: middle;
+}
+ .markdown h1 {
+	 font-weight: normal;
+	 color: #111;
+	 line-height: 1em;
+	 font-size: 2.5em;
+}
+ .markdown h2 {
+	 font-weight: normal;
+	 color: #111;
+	 line-height: 1em;
+	 font-size: 2em;
+}
+ .markdown h3 {
+	 font-weight: normal;
+	 color: #111;
+	 line-height: 1em;
+	 font-size: 1.5em;
+}
+ .markdown h4 {
+	 font-weight: normal;
+	 color: #111;
+	 line-height: 1em;
+	 font-weight: bold;
+	 font-size: 1.2em;
+}
+ .markdown h5 {
+	 font-weight: normal;
+	 color: #111;
+	 line-height: 1em;
+	 font-weight: bold;
+	 font-size: 1em;
+}
+ .markdown h6 {
+	 font-weight: normal;
+	 color: #111;
+	 line-height: 1em;
+	 font-weight: bold;
+	 font-size: 0.9em;
+}
+ .markdown blockquote {
+	 color: #666;
+	 margin: 0;
+	 padding-left: 3em;
+	 border-left: 0.5em #eee solid;
+}
+ .markdown hr {
+	 display: block;
+	 border: 0;
+	 border-top: 1px solid #aaa;
+	 border-bottom: 1px solid #eee;
+	 margin: 1em 0;
+	 padding: 0;
+}
+ .markdown pre {
+	 color: #000;
+	 font-family: monospace, monospace;
+	 _font-family: "courier new", monospace;
+	 font-size: 0.98em;
+	 white-space: pre;
+	 white-space: pre-wrap;
+	 word-wrap: break-word;
+}
+ .markdown code {
+	 color: #000;
+	 font-family: monospace, monospace;
+	 _font-family: "courier new", monospace;
+	 font-size: 0.98em;
+}
+ .markdown kbd {
+	 color: #000;
+	 font-family: monospace, monospace;
+	 _font-family: "courier new", monospace;
+	 font-size: 0.98em;
+}
+ .markdown samp {
+	 color: #000;
+	 font-family: monospace, monospace;
+	 _font-family: "courier new", monospace;
+	 font-size: 0.98em;
+}
+ .markdown b {
+	 font-weight: bold;
+}
+ .markdown strong {
+	 font-weight: bold;
+}
+ .markdown dfn {
+	 font-style: italic;
+}
+ .markdown ins {
+	 background: #ff9;
+	 color: #000;
+	 text-decoration: none;
+}
+ .markdown mark {
+	 background: #ff0;
+	 color: #000;
+	 font-style: italic;
+	 font-weight: bold;
+}
+ .markdown sub {
+	 font-size: 75%;
+	 line-height: 0;
+	 position: relative;
+	 vertical-align: baseline;
+	 bottom: -0.25em;
+}
+ .markdown sup {
+	 font-size: 75%;
+	 line-height: 0;
+	 position: relative;
+	 vertical-align: baseline;
+	 top: -0.5em;
+}
+ .markdown ul {
+	 margin: 1em 0;
+	 padding: 0 0 0 2em;
+}
+ .markdown ol {
+	 margin: 1em 0;
+	 padding: 0 0 0 2em;
+}
+ .markdown li p:last-child {
+	 margin: 0;
+}
+ .markdown dd {
+	 margin: 0 0 0 2em;
+}
+ .markdown table {
+	 border-collapse: collapse;
+	 border-spacing: 0;
+}
+ .markdown td {
+	 vertical-align: top;
+}
+ @media only screen and (min-width: 480px) {
+	 .markdown body {
+		 font-size: 14px;
+	}
+}
+ @media only screen and (min-width: 768px) {
+	 .markdown body {
+		 font-size: 16px;
+	}
+}
+ @media print {
+	 .markdown * {
+		 background: transparent !important;
+		 color: black !important;
+		 filter: none !important;
+		 -ms-filter: none !important;
+	}
+	 .markdown body {
+		 font-size: 12pt;
+		 max-width: 100%;
+	}
+	 .markdown a {
+		 text-decoration: underline;
+	}
+	 .markdown a:visited {
+		 text-decoration: underline;
+	}
+	 .markdown hr {
+		 height: 1px;
+		 border: 0;
+		 border-bottom: 1px solid black;
+	}
+	 .markdown a[href]:after {
+		 content: " (" attr(href) ")";
+	}
+	 .markdown abbr[title]:after {
+		 content: " (" attr(title) ")";
+	}
+	 .markdown .ir a:after {
+		 content: "";
+	}
+	 .markdown a[href^="javascript:"]:after {
+		 content: "";
+	}
+	 .markdown a[href^="#"]:after {
+		 content: "";
+	}
+	 .markdown pre {
+		 border: 1px solid #999;
+		 padding-right: 1em;
+		 page-break-inside: avoid;
+	}
+	 .markdown blockquote {
+		 border: 1px solid #999;
+		 padding-right: 1em;
+		 page-break-inside: avoid;
+	}
+	 .markdown tr {
+		 page-break-inside: avoid;
+	}
+	 .markdown img {
+		 page-break-inside: avoid;
+		 max-width: 100% !important;
+	}
+	 @page {
+		 .markdown:left {
+			 margin: 15mm 20mm 15mm 10mm;
+		}
+		 .markdown:right {
+			 margin: 15mm 10mm 15mm 20mm;
+		}
+	}
+	 .markdown p {
+		 orphans: 3;
+		 widows: 3;
+	}
+	 .markdown h2 {
+		 orphans: 3;
+		 widows: 3;
+		 page-break-after: avoid;
+	}
+	 .markdown h3 {
+		 orphans: 3;
+		 widows: 3;
+		 page-break-after: avoid;
+	}
+}
