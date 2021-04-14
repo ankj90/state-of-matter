@@ -1,0 +1,11 @@
+{
+  "vim.foldfix": true,
+  "vim.cursorStylePerMode.insert": "line",
+  "vim.cursorStylePerMode.normal": "block",
+  "vim.easymotionDimBackground": false,
+  "vim.hlsearch": true,
+  "vim.useSystemClipboard": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
+}

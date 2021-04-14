@@ -53,14 +53,14 @@ const Post = () => {
     <div className="flex flex-col xl:flex-row xl:items-center justify-between px-10 xl:px-16 py-5 border-b border-gray-400">
       <div className="flex flex-col">
         <h2 className="text-4xl">A Spaceship named Becky</h2>
-        <div className="flex items-center py-1 font-sub">
+        <div className="flex items-center py-1">
           <span className="border-gray-700 border-r pr-3">Fiction</span>
           <span className="px-3">Suchitra Sukumar</span>
           <span className="border-gray-700 border-l pl-3">India</span>
         </div>
       </div>
       <div className="flex flex-col xl:pl-20">
-        <div className="flex items-center py-1 font-sub">
+        <div className="flex items-center py-1">
           <span className="border-gray-700 border-r pr-3">Science Fiction</span>
           <span className="px-3">Adventure</span>
           <span className="border-gray-700 border-l pl-3">Aliens</span>
