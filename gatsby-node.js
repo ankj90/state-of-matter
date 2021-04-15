@@ -1,16 +1,19 @@
 const { createFilePath } = require("gatsby-source-filesystem")
-var slug = require('slug')
+var slug = require("slug")
 const path = require("path")
 
 async function createPostPages(actions, graphql) {
   const { createPage } = actions
   const result = await graphql(`
-    query MyQuery {
+    query PostPageQuery {
       allSanityPost {
         edges {
           node {
             title
             id
+            slug{
+              current
+            }
           }
         }
       }
@@ -22,10 +25,37 @@ async function createPostPages(actions, graphql) {
 
   posts.forEach(({ node }, index) => {
     createPage({
-      path: path.join('post', slug(node.title)),
-      component: path.resolve(
-        `./src/pages/post.js`
-      ),
+      path: path.join("post", node.slug.current),
+      component: path.resolve(`./src/pages/post.js`),
+      context: {
+        id: node.id,
+      },
+    })
+  })
+}
+
+async function createIssuePages(actions, graphql) {
+  const { createPage } = actions
+  const result = await graphql(`
+    query IssuePageQuery {
+      allSanityIssues {
+        edges {
+          node {
+            id
+            number
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+  const issues = result.data.allSanityIssues.edges
+
+  issues.forEach(({ node }, index) => {
+    createPage({
+      path: path.join("issue", slug(`issue-${node.number}`)),
+      component: path.resolve(`./src/pages/issue.js`),
       context: {
         id: node.id,
       },
@@ -35,4 +65,5 @@ async function createPostPages(actions, graphql) {
 
 exports.createPages = async ({ actions, graphql }) => {
   await createPostPages(actions, graphql)
+  await createIssuePages(actions, graphql)
 }

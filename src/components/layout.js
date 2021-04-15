@@ -8,9 +8,7 @@ const Layout = ({ children, header, sidebar, body }) => {
   return (
     <div className="flex">
       <div className="h-screen w-full flex flex-col overflow-y-auto">
-        <Helmet
-          title="State Of Matter"
-        ></Helmet>
+        <Helmet title="State Of Matter"></Helmet>
         <Header content={header} />
         <Body sidebar={sidebar} body={body} />
       </div>

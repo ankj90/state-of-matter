@@ -55,7 +55,7 @@ const PostBody = ({ data }) => {
 }
 
 export const query = graphql`
-  query MyQuery($id: String) {
+  query PostQuery($id: String) {
     sanityPost(id: { eq: $id }) {
       title
       id
