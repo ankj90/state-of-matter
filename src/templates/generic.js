@@ -31,7 +31,7 @@ const SidebarContent = ({ links, subpage }) => {
     <div className="text-2xl flex flex-col">
       {links.map(link => (
         <Link
-          to={`/page/${link.link}`}
+          to={`/${link.link}`}
           className={`py-3 hover:text-custom-red ${
             link.slug === subpage.slug ? "font-bold" : ""
           }`}
