@@ -92,7 +92,7 @@ async function createGenericPages(actions, graphql) {
     node.subpages.forEach(subpage => {
       createPage({
         path: path.join("page", node.slug.current, subpage.slug),
-        component: path.resolve(`./src/pages/generic.js`),
+        component: path.resolve(`./src/templates/generic.js`),
         context: {
           pageTitle: node.title,
           subpage: subpage,

@@ -4,7 +4,6 @@ import { Link } from "gatsby"
 import { SanityBlockRenderer } from "../components/sanityBlockRenderer"
 
 const Generic = ({ pageContext }) => {
-  console.log(pageContext)
   return (
     <Layout
       header={<HeaderContent title={pageContext.pageTitle} />}
