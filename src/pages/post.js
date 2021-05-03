@@ -1,15 +1,15 @@
 import React from "react"
 import { graphql } from "gatsby"
+
 import Layout from "../components/layout"
-import Body from "../components/body"
-const BlockContent = require("@sanity/block-content-to-react")
+import { SanityBlockRenderer } from "../components/sanityBlockRenderer"
 
 const Post = ({ data, pageContext }) => {
   return (
     <Layout
       header={<HeaderContent title={data.sanityPost.title} />}
       sidebar={<SidebarContent data={data.sanityPost} />}
-      body={<PostBody data={data.sanityPost} />}
+      body={<BodyContent data={data.sanityPost._rawBody} />}
     ></Layout>
   )
 }
@@ -40,18 +40,12 @@ const SidebarContent = ({ data }) => {
   )
 }
 
-const PostBody = ({ data }) => {
-  const serializers = {
-    types: {
-      code: props => (
-        <pre data-language={props.node.language}>
-          <code>{props.node.code}</code>
-        </pre>
-      ),
-    },
-  }
-  const Block = <BlockContent blocks={data._rawBody} serializers={serializers} />
-  return <div className="text-xl paragraphs px-10 py-8 lg:p-16 markdown">{Block}</div>
+const BodyContent = ({ data }) => {
+  return (
+    <div className="text-xl paragraphs px-10 py-8 lg:p-16 ">
+      <SanityBlockRenderer data={data} />
+    </div>
+  )
 }
 
 export const query = graphql`

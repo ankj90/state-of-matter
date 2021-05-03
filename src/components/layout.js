@@ -16,12 +16,12 @@ const Layout = ({ children, header, sidebar, body }) => {
   )
 }
 
-const RotatedText = () => {
-  return (
-    <div className="pt-10">
-      <h1 className="rotate-text">State Of Matter</h1>
-    </div>
-  )
-}
+// const RotatedText = () => {
+//   return (
+//     <div className="pt-10">
+//       <h1 className="rotate-text">State Of Matter</h1>
+//     </div>
+//   )
+// }
 
 export default Layout
