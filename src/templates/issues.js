@@ -46,7 +46,6 @@ const BodyContent = ({ data }) => {
 }
 
 const Issue = ({ data }) => {
-  console.log(data);
   return (
     <a href={`/issue/issue-${data.number}`} className="">
       <img

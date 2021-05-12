@@ -24,7 +24,6 @@ const Index = ({ pageContext, data }) => {
 }
 
 const HeaderContent = ({ data }) => {
-  console.log(data)
   return (
     <>
       <h1 className="text-6xl">{data.title}</h1>
