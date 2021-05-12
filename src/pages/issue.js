@@ -24,11 +24,14 @@ const Index = ({ pageContext, data }) => {
 }
 
 const HeaderContent = ({ data }) => {
+  console.log(data)
   return (
     <>
       <h1 className="text-6xl">{data.title}</h1>
       <span className="text-2xl">{data.date}</span>
-      <span className="text-2xl">{data.editor}</span>
+      {data.editor[0] && (
+        <span className="text-2xl">{data.editor[0].name}</span>
+      )}
     </>
   )
 }
