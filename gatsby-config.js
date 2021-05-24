@@ -27,6 +27,13 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-sanity-image",
+      options: {
+        projectId: `c9ar0vgq`,
+        dataset: `production`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `gatsby-starter-default`,

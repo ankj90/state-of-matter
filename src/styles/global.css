@@ -34,10 +34,9 @@ h6 {
   @apply py-3;
 }
 
-ul {
-  @apply list-inside list-disc !important;
- }
-
-ol {
-  @apply list-inside list-decimal !important;
+.nav-li {
+  @apply my-1 !important;
+}
+.nav-link {
+  @apply whitespace-nowrap text-custom-darkblue !important;
 }
