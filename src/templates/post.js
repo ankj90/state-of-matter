@@ -9,7 +9,12 @@ const Post = ({ data, pageContext }) => {
     <Layout
       header={<HeaderContent title={data.sanityPost.title} />}
       sidebar={<SidebarContent data={data.sanityPost} />}
-      body={<BodyContent data={data.sanityPost._rawBody} />}
+      body={
+        <BodyContent
+          data={data.sanityPost._rawBody}
+          contentWarning={data.sanityPost.contentWarning}
+        />
+      }
     ></Layout>
   )
 }
@@ -40,9 +45,18 @@ const SidebarContent = ({ data }) => {
   )
 }
 
-const BodyContent = ({ data }) => {
+const BodyContent = ({ contentWarning, data }) => {
+  console.log(contentWarning)
   return (
     <div className="text-xl paragraphs px-10 py-8 lg:p-16 ">
+      <div className="flex items-center mb-10">
+        <h3 className="mr-3 align-baseline">Content Warnings:</h3>
+        <ul classNmae="flex items-center">
+          {contentWarning.map(warning => (
+            <span key={warning.id} className="bg-custom-lightgray px-2 py-2 mr-2 rounded shadow leading-none align-baseline">{warning.title}</span>
+          ))}
+        </ul>
+      </div>
       <SanityBlockRenderer data={data} />
     </div>
   )
@@ -70,6 +84,10 @@ export const query = graphql`
         }
       }
       tags {
+        id
+        title
+      }
+      contentWarning {
         id
         title
       }
