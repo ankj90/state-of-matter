@@ -134,9 +134,64 @@ async function createGenericPages(actions, graphql) {
   })
 }
 
+async function createTagPages(actions, graphql) {
+  const { createPage } = actions
+  const result = await graphql(`
+    {
+      allSanityPost {
+        group(field: tags___title) {
+          edges {
+            node {
+              id
+              title
+              slug {
+                current
+              }
+              author {
+                id
+                name
+              }
+              category {
+                id
+                title
+              }
+              tags {
+                id
+                title
+              }
+            }
+          }
+          fieldValue
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+  const tags = result.data.allSanityPost.group.map(grp => ({
+    name: grp.fieldValue,
+    posts: grp.edges.map(tag => tag.node),
+  }))
+
+  tags.forEach((tag, index) => {
+    createPage({
+      path: path.join("tag", slug(tag.name.toLowerCase())),
+      component: path.resolve(`./src/templates/tag.js`),
+      context: {
+        name: tag.name,
+        posts: tag.posts,
+        tags: result.data.allSanityPost.group.map(
+          tagGrp => tagGrp.fieldValue
+        ),
+      },
+    })
+  })
+}
+
 exports.createPages = async ({ actions, graphql }) => {
   await createPostPages(actions, graphql)
   await createIssuePages(actions, graphql)
   await createGenericPages(actions, graphql)
   await createIssueParentPages(actions, graphql)
+  await createTagPages(actions, graphql)
 }

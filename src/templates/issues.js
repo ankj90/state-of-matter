@@ -1,15 +1,18 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SanityImage from "gatsby-plugin-sanity-image"
 
 const Issues = ({ data, pageContext }) => {
+  console.log(pageContext)
   const sidebarData = pageContext.years
   const bodyData = data.allSanityIssues.edges.map(edge => edge.node)
   return (
     <Layout
       header={<HeaderContent />}
-      sidebar={<SidebarContent data={sidebarData} />}
+      sidebar={
+        <SidebarContent data={sidebarData} activeYear={pageContext.year} />
+      }
       body={<BodyContent data={bodyData} />}
     />
   )
@@ -23,18 +26,20 @@ const HeaderContent = () => {
   )
 }
 
-const SidebarContent = ({ data }) => {
+const SidebarContent = ({ data, activeYear }) => {
   return (
-    <div className="text-2xl lg:text-3xl flex flex-row lg:flex-col items-center overflow-x-auto">
-      <h2 className="text-4xl lg:text-5xl lg:mb-5 mr-3">Year</h2>
+    <div className="text-2xl lg:text-3xl flex flex-row lg:flex-col items-center overflow-x-auto px-8 lg:px-0">
+      {/* <h2 className="text-4xl lg:text-5xl lg:mb-5 mr-3">Year</h2> */}
       {data.map((year, index) => (
-        <a
+        <Link
           key={index}
-          href={`/issues/${year}`}
-          className="px-3 lg:px-0 lg:py-3"
+          to={`/issues/${year}`}
+          className={`px-3 lg:px-0 lg:py-3 ${
+            year == activeYear ? "link-active" : ""
+          }`}
         >
           {year}
-        </a>
+        </Link>
       ))}
     </div>
   )

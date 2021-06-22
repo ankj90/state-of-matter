@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Josefin+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&family=Josefin+Slab&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,20 +10,23 @@ html {
 }
 
 a {
-  @apply text-custom-red;
+  @apply text-custom-darkblue;
 }
 
-p {
-  @apply font-sans;
+a:hover {
+  @apply text-custom-red !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-heading;
+.link-active {
+  @apply text-custom-red underline !important;
+}
+
+.menu-link {
+  @apply text-custom-darkblue;
+}
+
+.menu-link:hover {
+  @apply underline !important;
 }
 
 .absolute-important {
@@ -35,8 +38,16 @@ h6 {
 }
 
 .nav-li {
-  @apply my-1 !important;
+  @apply my-3 !important;
 }
 .nav-link {
   @apply whitespace-nowrap text-custom-darkblue !important;
+}
+
+.filter-active {
+  @apply text-custom-red underline;
+}
+
+button:focus {
+  @apply outline-none;
 }

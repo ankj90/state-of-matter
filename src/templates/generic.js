@@ -21,7 +21,7 @@ const Generic = ({ pageContext }) => {
 const HeaderContent = ({ title }) => {
   return (
     <>
-      <h1 className="text-6xl">{title}</h1>
+      <h1 className="text-4xl lg:text-6xl">{title}</h1>
     </>
   )
 }

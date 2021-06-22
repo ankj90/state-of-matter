@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
+import slug from "slug"
+import { Link } from "gatsby"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -27,14 +29,23 @@ const SidebarContent = ({ data }) => {
   const author = data.author[0]
   return (
     <>
-      <h2 className="text-4xl lg:text-5xl">{author.name}</h2>
+      <h2 className="text-4xl lg:text-5xl lg:mt-10">{author.name}</h2>
       <div className="flex flex-col text-2xl lg:text-3xl pt-3 lg:pt-5">
         <span>{author.nationality}</span>
         <span>{data.date}</span>
       </div>
       <div className="flex flex-col text-lg lg:text-xl pt-3 lg:pt-5">
+        {data.category.map(c => (
+          <Link to={`/category/${slug(c.title)}`}>
+            <span key={c.id}>{c.title}</span>
+          </Link>
+        ))}
+      </div>
+      <div className="flex flex-col text-lg lg:text-xl pt-3 lg:pt-5">
         {data.tags.map(t => (
-          <span key={t.id}>{t.title}</span>
+          <Link to={`/tag/${slug(t.title)}`}>
+            <span key={t.id}>{t.title}</span>
+          </Link>
         ))}
       </div>
       {/* <span className="text-xl lg:text-2xl py-3">2074 Words</span> */}
@@ -46,16 +57,29 @@ const SidebarContent = ({ data }) => {
 }
 
 const BodyContent = ({ contentWarning, data }) => {
-  console.log(contentWarning)
+  const [isOpen, setOpen] = useState(false)
   return (
-    <div className="text-xl paragraphs px-10 py-8 lg:p-16 ">
-      <div className="flex items-center mb-10">
-        <h3 className="mr-3 align-baseline">Content Warnings:</h3>
-        <ul classNmae="flex items-center">
-          {contentWarning.map(warning => (
-            <span key={warning.id} className="bg-custom-lightgray px-2 py-2 mr-2 rounded shadow leading-none align-baseline">{warning.title}</span>
-          ))}
-        </ul>
+    <div className="text-xl paragraphs px-10 py-8 lg:p-16 font-slab">
+      <div className="flex mb-10">
+        <div
+          className="flex border-2 border-custom-red text-custom-blue p-2 leading-none select-none"
+          onClick={() => setOpen(!isOpen)}
+        >
+          <h3 className="mr-3 align-baseline">
+            Content Warnings
+            {isOpen && <span> :</span>}
+          </h3>
+          {isOpen && (
+            <ul>
+              {contentWarning.map((warning, index) => (
+                <span key={warning.id}>
+                  {warning.title}
+                  {index === contentWarning.length - 1 ? " " : ", "}
+                </span>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
       <SanityBlockRenderer data={data} />
     </div>

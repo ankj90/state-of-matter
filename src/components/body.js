@@ -5,7 +5,7 @@ import ContentArea from './contentArea';
 
 const Body = ({ sidebar, body }) => {
   return (
-    <main className="flex flex-col lg:grid grid-cols-12 h-full lg:overflow-hidden z-10 relative">
+    <main className="flex flex-col lg:grid grid-cols-12 h-full lg:overflow-hidden z-10 relative lg:pl-20">
       <Sidebar>{sidebar}</Sidebar>
       <ContentArea>{body}</ContentArea>
     </main>

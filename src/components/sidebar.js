@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react"
 
 const Sidebar = ({ children }) => {
   return (
-    <div id="home-cat" className="col-span-12 lg:col-span-3 flex flex-col px-10 py-8 lg:py-16 lg:overflow-y-auto">
+    <div
+      id="home-cat"
+      className="col-span-12 lg:col-span-3 flex flex-col lg:overflow-y-auto py-8 px-8"
+    >
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
