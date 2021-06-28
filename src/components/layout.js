@@ -8,9 +8,16 @@ import Body from "./body"
 import { Helmet } from "react-helmet"
 import { MenuButton } from "./icons/MenuButton"
 
-const Layout = ({ children, header, sidebar, body }) => {
+const Layout = ({
+  children,
+  header,
+  sidebar,
+  body,
+  isHeaderFullHeight = false,
+}) => {
   const [isOpen, setOpen] = useState(false)
   const scroll = useScroll()
+  const hasSidebar = sidebar ? true : false
   const data = useStaticQuery(graphql`
     {
       allSanityCategory {
@@ -19,24 +26,50 @@ const Layout = ({ children, header, sidebar, body }) => {
           id
         }
       }
+      currentIssue: allSanityIssues(
+        sort: { fields: [year, month], order: [DESC, DESC] }
+        limit: 1
+      ) {
+        nodes {
+          id
+          year
+          month
+          number
+          image {
+            asset {
+              gatsbyImageData
+            }
+          }
+        }
+      }
     }
   `)
+  const currentIssue = data.currentIssue.nodes[0]
   const categories = data.allSanityCategory.nodes
   const menuData = {
     categories,
   }
   return (
-    <div className="flex">
+    <div className="flex h-screen overflow-y-auto">
       <div className="absolute top-0 right-0 bg-black text-white px-3 py-1 z-50">
         {scroll}
       </div>
       <FloatingMenu isOpen={isOpen} setOpen={setOpen} data={menuData} />
-      <SideMenu setOpen={setOpen} isOpen={isOpen} />
-      <div className="h-screen w-full flex flex-col overflow-y-auto relative">
+      <SideMenu
+        setOpen={setOpen}
+        isOpen={isOpen}
+        isHeaderFullHeight={isHeaderFullHeight}
+        currentIssueLink={`/issue/issue-${currentIssue.number}`}
+      />
+      <div className="w-full flex flex-col relative">
         <MobileMenu isOpen={isOpen} setOpen={setOpen} />
-        <Helmet title="State Of Matter"></Helmet>
-        <Header content={header} />
-        <Body sidebar={sidebar} body={body} />
+        <Helmet title="State Of Matter" currentIssue={currentIssue}></Helmet>
+        <Header
+          content={header}
+          isHeaderFullHeight={isHeaderFullHeight}
+          currentIssue={currentIssue}
+        />
+        <Body sidebar={sidebar} body={body} hasSidebar={hasSidebar} />
       </div>
     </div>
   )
@@ -69,8 +102,14 @@ const MobileMenu = ({ isOpen, setOpen }) => {
   )
 }
 
-const SideMenu = ({ isOpen, setOpen }) => {
-  const buttonColor = isOpen ? "bg-white" : "bg-transparent"
+const SideMenu = ({
+  isOpen,
+  setOpen,
+  isHeaderFullHeight,
+  currentIssueLink,
+}) => {
+  const bgColor = isHeaderFullHeight ? "bg-transparent" : "bg-white"
+  const buttonColor = isOpen ? bgColor : "bg-transparent"
   const buttonIcon = isOpen ? (
     <CloseButton className="h-10 w-10 text-custom-red" />
   ) : (
@@ -78,7 +117,7 @@ const SideMenu = ({ isOpen, setOpen }) => {
   )
 
   return (
-    <div className="w-10 md:w-20 h-screen bg-transparent z-20 absolute top-0 bottom-0 left-0 flex-shrink-0 hidden lg:flex flex-col border-r">
+    <div className="w-10 md:w-20 h-screen bg-transparent z-20 absolute top-0 bottom-0 left-0 flex-shrink-0 hidden lg:flex flex-col border-r border-custom-red">
       <div className={`h-36 flex-shrink-0 ${buttonColor}`}>
         <button
           onClick={() => setOpen(!isOpen)}
@@ -90,13 +129,16 @@ const SideMenu = ({ isOpen, setOpen }) => {
       <div className="h-full flex flex-col">
         <Link
           to="/"
-          className="bg-white flex justify-center items-center h-1/2 w-full"
+          className={`${bgColor} flex justify-center items-center h-1/2 w-full`}
         >
           <StateOfMatterSVG className="text-custom-red h-2/3 w-7" />
         </Link>
-        <div className="bg-white flex justify-center items-center h-1/2 w-full">
+        <Link
+          to={currentIssueLink}
+          className={`${bgColor} flex justify-center items-center h-1/2 w-full`}
+        >
           <CurrentIssueSVG className="text-custom-red h-2/3 w-6" />
-        </div>
+        </Link>
       </div>
     </div>
   )
@@ -241,28 +283,11 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
       <div className="flex flex-col md:flex-row md:mx-1 md:px-2 py-2 border-t border-gray-300 mt-auto pt-5">
         <div className="flex flex-col">
           <div className="flex items-center">
-            <span className="text-custom-darkblue text-xs mr-3 w-12">
-              Connect
-            </span>
             <ul className="flex items-center">
               {social1.map(link => (
-                <li className="mr-2">
+                <li className="mr-6">
                   <a href={link.href}>
-                    <img src={link.icon} alt="" className="h-4 w-4" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex items-center mt-2">
-            <span className="text-custom-darkblue text-xs mr-3 w-12">
-              Subscribe
-            </span>
-            <ul className="flex items-center">
-              {social1.map(link => (
-                <li className="mr-2">
-                  <a href={link.href}>
-                    <img src={link.icon} alt="" className="h-4 w-4" />
+                    <img src={link.icon} alt="" className="h-6 w-6" />
                   </a>
                 </li>
               ))}
@@ -271,7 +296,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
         </div>
         <a
           href="/privacy"
-          className="text-xs text-custom-darkblue mt-5 md:mt-auto md:ml-auto"
+          className="text-24 leading-28 text-custom-darkblue mt-5 md:mt-auto md:ml-auto"
         >
           Privacy Policy
         </a>

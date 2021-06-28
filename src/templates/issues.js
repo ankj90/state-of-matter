@@ -4,7 +4,6 @@ import Layout from "../components/layout"
 import SanityImage from "gatsby-plugin-sanity-image"
 
 const Issues = ({ data, pageContext }) => {
-  console.log(pageContext)
   const sidebarData = pageContext.years
   const bodyData = data.allSanityIssues.edges.map(edge => edge.node)
   return (
@@ -46,7 +45,6 @@ const SidebarContent = ({ data, activeYear }) => {
 }
 
 const BodyContent = ({ data }) => {
-  console.log(data)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-10 lg:px-16 py-10">
       {data.map(month => (

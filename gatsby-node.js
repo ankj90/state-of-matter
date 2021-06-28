@@ -180,9 +180,34 @@ async function createTagPages(actions, graphql) {
       context: {
         name: tag.name,
         posts: tag.posts,
-        tags: result.data.allSanityPost.group.map(
-          tagGrp => tagGrp.fieldValue
-        ),
+        tags: result.data.allSanityPost.group.map(tagGrp => tagGrp.fieldValue),
+      },
+    })
+  })
+}
+
+async function createProfilePages(actions, graphql) {
+  const { createPage } = actions
+  const result = await graphql(`
+    query GenerateProfilePagesQuery {
+      allSanityProfile {
+        nodes {
+          id
+          name
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+  const profiles = result.data.allSanityProfile.nodes
+
+  profiles.forEach(profile => {
+    createPage({
+      path: path.join("profile", slug(profile.name)),
+      component: path.resolve(`./src/templates/profile.js`),
+      context: {
+        id: profile.id,
       },
     })
   })
@@ -194,4 +219,5 @@ exports.createPages = async ({ actions, graphql }) => {
   await createGenericPages(actions, graphql)
   await createIssueParentPages(actions, graphql)
   await createTagPages(actions, graphql)
+  await createProfilePages(actions, graphql)
 }

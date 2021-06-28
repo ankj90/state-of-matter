@@ -19,6 +19,14 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          "G-8KRRPBPT2L", // Google Analytics / GA
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-sanity`,
       options: {
         projectId: `c9ar0vgq`,

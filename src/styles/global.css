@@ -51,3 +51,7 @@ a:hover {
 button:focus {
   @apply outline-none;
 }
+
+.twitter-iframe > div {
+  @apply h-full;
+}

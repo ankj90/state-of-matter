@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react"
 const BlockContent = require("@sanity/block-content-to-react")
-export const SanityBlockRenderer = ({ data }) => {
+export const SanityBlockRenderer = ({ data, className = "" }) => {
   const serializers = {
     types: {
       code: props => (
@@ -11,5 +11,5 @@ export const SanityBlockRenderer = ({ data }) => {
     },
   }
   const Block = <BlockContent blocks={data} serializers={serializers} />
-  return <div className="markdown">{Block}</div>
+  return <div className={`markdown ${className}`}>{Block}</div>
 }

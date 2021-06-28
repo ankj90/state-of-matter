@@ -14,11 +14,15 @@ const Index = ({ pageContext, data }) => {
     .map(post => post.tags)
     .flat()
     .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i) //Remove duplicates by id
+  const categories = posts
+    .map(post => post.category)
+    .flat()
+    .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i) //Remove duplicates by id
 
   return (
     <Layout
       header={<HeaderContent data={headData} />}
-      sidebar={<SidebarContent tags={tags} />}
+      sidebar={<SidebarContent categories={categories} />}
       body={<BodyContent posts={posts} />}
     />
   )
@@ -36,15 +40,15 @@ const HeaderContent = ({ data }) => {
   )
 }
 
-const SidebarContent = ({ tags }) => {
+const SidebarContent = ({ categories }) => {
   return (
     <div className="text-lg lg:text-4xl flex flex-row lg:flex-col -mx-3 lg:mx-0 px-10 lg:px-0">
-      {tags.map(tag => (
+      {categories.map(cat => (
         <div
           className="cursor-pointer bg-gray-200 lg:bg-white px-3 py-1 lg:px-0 lg:pb-10 mx-2 lg:mx-0 rounded-full lg:rounded-none"
-          key={tag.id}
+          key={cat.id}
         >
-          {tag.title}
+          {cat.title}
         </div>
       ))}
     </div>

@@ -160,13 +160,13 @@ const FilterBox = ({ title, arr, activeItems, setActiveItems }) => {
 }
 
 const BodyContent = ({ data, test }) => {
-  console.log(
-    test,
-    Object.values(test).reduce(
-      (a, b) => b.filter(Set.prototype.has, new Set(a)),
-      []
-    )
-  )
+  // console.log(
+  //   test,
+  //   Object.values(test).reduce(
+  //     (a, b) => b.filter(Set.prototype.has, new Set(a)),
+  //     []
+  //   )
+  // )
   return (
     <div>
       {/* {data.map(post => (

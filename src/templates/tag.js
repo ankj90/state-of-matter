@@ -5,7 +5,6 @@ import Layout from "../components/layout"
 import { PostListItem } from "../components/post-list-item"
 
 const Tag = ({ pageContext }) => {
-  console.log(pageContext)
   return (
     <Layout
       header={<HeaderContent title={pageContext.name} />}

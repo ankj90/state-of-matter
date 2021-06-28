@@ -21,6 +21,19 @@ module.exports = {
       spacing: {
         30: "7.5rem",
       },
+      fontSize: {
+        18: "18px",
+        24: "24px",
+        30: "30px",
+        36: "36px",
+      },
+      lineHeight: {
+        21: "21px",
+        24: "24px",
+        28: "28px",
+        36: "36px",
+        42: "42px",
+      },
       fontFamily: {
         sans: [
           '"Josefin Sans"',

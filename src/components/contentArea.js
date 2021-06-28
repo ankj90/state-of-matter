@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react"
 
-const ContentArea = ({ children }) => {
+const ContentArea = ({ children, hasSidebar }) => {
+  const cols = hasSidebar ? "lg:col-span-9 lg:border-l" : ""
   return (
-    <div id="" className="col-span-12 lg:col-span-9 flex flex-col lg:border-l border-gray-300 lg:overflow-y-auto">
+    <div
+      id=""
+      className={`col-span-12 ${cols} flex flex-col border-gray-300 lg:overflow-y-auto`}
+    >
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default ContentArea;
+export default ContentArea

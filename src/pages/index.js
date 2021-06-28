@@ -1,110 +1,124 @@
 import React from "react"
+import { graphql } from "gatsby"
+import dayjs from "dayjs"
 import Layout from "../components/layout"
+import { TwitterTimelineEmbed } from "react-twitter-embed"
 
-const Index = () => {
+const Index = ({ data }) => {
+  const currentIssue = data.currentIssue.nodes[0]
   return (
     <Layout
-      header={<HeaderContent />}
-      sidebar={<SidebarContent />}
+      header={<HeaderContent currentIssue={currentIssue} />}
       body={<BodyContent />}
+      isHeaderFullHeight={true}
     />
   )
 }
 
-const HeaderContent = () => {
+const HeaderContent = ({ currentIssue }) => {
+  const dateString = `${currentIssue.year}-${currentIssue.month}-1`
   return (
-    <>
-      <h1 className="text-4xl md:text-5xl lg:text-6xl">State Of Matter</h1>
-    </>
-  )
-}
-
-const SidebarContent = () => {
-  return (
-    <div className="text-2xl flex flex-col">
-      <a href="#about-us" className="py-3 hover:text-custom-red">
-        About Us
-      </a>
-      <a href="#guidelines" className="py-3 hover:text-custom-red">
-        Submission Guidelines
-      </a>
+    <div className="flex flex-col justify-end items-start h-full w-full">
+      <div className="flex flex-col">
+        <h1 className="text-36 leading-42">State Of Matter</h1>
+        <div className="flex items-center text-30 leading-36">
+          <span>Issue {currentIssue.number}</span>
+          <span className="px-3">|</span>
+          <span>{dayjs(dateString).format("MMM YY")}</span>
+        </div>
+      </div>
+      <div className="self-center">
+        <svg
+          width="30"
+          height="19"
+          viewBox="0 0 30 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3.525 0L15 11.45L26.475 0L30 3.525L15 18.525L0 3.525L3.525 0Z"
+            fill="#FF5757"
+          />
+        </svg>
+      </div>
     </div>
   )
 }
 
 const BodyContent = () => {
   return (
-    <div className="border-t border-gray-300 px-10 lg:p-10 text-lg">
-      <div id="about-us" class="flex flex-col pt-10">
-        <h2 class="text-3xl font-bold">About Us</h2>
-        <p class="mt-5 ">
-          State of Matter was formed with the idea to uplift and promote,
-          primarily, the wide diversity of Indian and South-East Asian voices.
-          We believe that speculative fiction holds the power to develop the
-          future or analyze the past in the most creative ways possible. So if
-          your story/poetry contains elements that are imaginative or unreal for
-          the current world, or presents an entirely different view of it, share
-          it with us.
-        </p>
+    <div className="text-lg grid grid-cols-12 text-custom-darkblue">
+      <div className="col-span-8 flex flex-col h-full border-r">
+        <div className="text-24 leading-24 font-slab border-b border-custom-lightgray p-10 font-bold">
+          <p className="mb-6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
+            quibusdam veritatis, fuga voluptas ullam maiores, doloremque sed
+            harum magni expedita adipisci id omnis commodi ut voluptate quisquam
+            ea voluptates dolorum.
+          </p>
+          <p className="">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
+            quibusdam veritatis, fuga voluptas ullam maiores, doloremque sed
+            harum magni expedita adipisci id omnis commodi ut voluptate quisquam
+            ea voluptates dolorum.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 text-24 leading-24 font-slab border-b border-custom-lightgray font-light">
+          <div className="border border-custom-lightgray p-10 flex flex-col">
+            <p className="text-18 leading-21">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
+              consequuntur? Beatae.
+            </p>
+            <a href="/" className="text-custom-red font-bold mt-6 font-sans">
+              Submit Now
+            </a>
+          </div>
+          <div className="border border-custom-lightgray p-10 flex flex-col">
+            <p className="text-18 leading-21">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
+              consequuntur? Beatae.
+            </p>
+            <div className="flex items-center font-sans">
+              <a
+                href="/"
+                className="text-custom-red font-bold mt-6 font-sans mr-4"
+              >
+                Donate
+              </a>
+              <a href="/" className="text-custom-red font-bold mt-6 font-sans">
+                Shop
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="pt-10" id="guidelines">
-        <h2 class="text-3xl font-bold mb-5">Submission Guidelines</h2>
-        <h3 class="text-2xl mb-2">General Guidelines</h3>
-        <ul class="list-disc list-inside">
-          <li>
-            All submissions must be made through our{" "}
-            <a href="https://airtable.com/shrD3nwn5f844l16j">Submission Form</a>
-          </li>
-          <li>
-            We allow simultaneous submissions; No multiple submissions or
-            re-submissions.
-          </li>
-          <li>
-            We are looking for{" "}
-            <a href="http://neil-clarke.com/first-rights/">First World</a>{" "}
-            publishing rights, so please do not send us works already published
-            on the web or elsewhere.
-          </li>
-        </ul>
-        <h3 class="text-2xl mt-5 mb-2">Submission Genre</h3>
-        <p>
-          We are looking for Speculative Fiction stories and poetry, which is a
-          broadly defined category and includes Science Fiction, Fantasy,
-          Horror, Obscure and other slipstream genres. While sexual themes are
-          not frowned upon, kindly refrain from sending us hard erotica or gore.
-          Apart from book reviews or interviews, we are quite liberal in the
-          form of non-fiction entries we receive.
-        </p>
-        <h3 class="text-2xl mt-5 mb-2">Submission Length</h3>
-        <ul class="list-inside list-disc">
-          <li>
-            Fiction / Non-Fiction : up to 10000 words
-            <ul class="list-disc list-inside ml-8">
-              <li>Times New Roman, 12 pt</li>
-              <li>Double spaced</li>
-            </ul>
-          </li>
-          <li>
-            Poetry: up to 3 pages
-            <ul class="list-disc list-inside ml-8">
-              <li>Times New Roman, 12 pt</li>
-              <li>Single spaced</li>
-            </ul>
-          </li>
-        </ul>
-        <h3 class="text-2xl mt-5">Response Time</h3>
-        <p class="mt-5">
-          We usually respond within 4 weeks. Please follow up with us at
-          editor@stateofmatter.in in case you haven’t heard back from us.
-        </p>
-        <p class="mt-2">
-          In case of withdrawals, please send us an email to the above address
-          stating the reason.
-        </p>
+      <div className="col-span-4 text-24 leading-24 font-slab border-r border-b border-custom-lightgray p-6">
+        <div className="twitter-iframe h-full">
+          <TwitterTimelineEmbed
+            sourceType="profile"
+            screenName="stateofmattermz"
+            options={{ height: "100%" }}
+          />
+        </div>
       </div>
     </div>
   )
 }
+
+export const query = graphql`
+  query IndexPageQuery {
+    currentIssue: allSanityIssues(
+      sort: { fields: [year, month], order: [DESC, DESC] }
+      limit: 1
+    ) {
+      nodes {
+        id
+        year
+        month
+        number
+      }
+    }
+  }
+`
 
 export default Index
