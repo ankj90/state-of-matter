@@ -1,15 +1,17 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React, { useRef } from "react"
+import { graphql, Link } from "gatsby"
+import { useIntersection } from "react-use"
 import dayjs from "dayjs"
 import Layout from "../components/layout"
 import { TwitterTimelineEmbed } from "react-twitter-embed"
+import { SanityBlockRenderer } from "../components/sanityBlockRenderer"
 
 const Index = ({ data }) => {
   const currentIssue = data.currentIssue.nodes[0]
   return (
     <Layout
       header={<HeaderContent currentIssue={currentIssue} />}
-      body={<BodyContent />}
+      body={<BodyContent data={data.siteSettings} />}
       isHeaderFullHeight={true}
     />
   )
@@ -19,15 +21,18 @@ const HeaderContent = ({ currentIssue }) => {
   const dateString = `${currentIssue.year}-${currentIssue.month}-1`
   return (
     <div className="flex flex-col justify-end items-start h-full w-full">
-      <div className="flex flex-col">
+      <Link
+        to={`/issue/issue-${currentIssue.number}`}
+        className="flex flex-col text-white"
+      >
         <h1 className="text-36 leading-42">State Of Matter</h1>
         <div className="flex items-center text-30 leading-36">
           <span>Issue {currentIssue.number}</span>
           <span className="px-3">|</span>
           <span>{dayjs(dateString).format("MMM YY")}</span>
         </div>
-      </div>
-      <div className="self-center">
+      </Link>
+      <div className="self-center hidden lg:block">
         <svg
           width="30"
           height="19"
@@ -45,55 +50,37 @@ const HeaderContent = ({ currentIssue }) => {
   )
 }
 
-const BodyContent = () => {
+const BodyContent = ({ data, scrollRef }) => {
   return (
-    <div className="text-lg grid grid-cols-12 text-custom-darkblue">
-      <div className="col-span-8 flex flex-col h-full border-r">
+    <div
+      className="text-lg grid lg:grid-cols-12 text-custom-darkblue"
+      ref={scrollRef}
+    >
+      <div className="col-span-12 lg:col-span-8 flex flex-col h-full border-r">
         <div className="text-24 leading-24 font-slab border-b border-custom-lightgray p-10 font-bold">
-          <p className="mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
-            quibusdam veritatis, fuga voluptas ullam maiores, doloremque sed
-            harum magni expedita adipisci id omnis commodi ut voluptate quisquam
-            ea voluptates dolorum.
-          </p>
-          <p className="">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
-            quibusdam veritatis, fuga voluptas ullam maiores, doloremque sed
-            harum magni expedita adipisci id omnis commodi ut voluptate quisquam
-            ea voluptates dolorum.
-          </p>
+          <SanityBlockRenderer data={data._rawAboutUsText} />
         </div>
-        <div className="grid grid-cols-2 text-24 leading-24 font-slab border-b border-custom-lightgray font-light">
-          <div className="border border-custom-lightgray p-10 flex flex-col">
-            <p className="text-18 leading-21">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
-              consequuntur? Beatae.
-            </p>
-            <a href="/" className="text-custom-red font-bold mt-6 font-sans">
-              Submit Now
-            </a>
-          </div>
-          <div className="border border-custom-lightgray p-10 flex flex-col">
-            <p className="text-18 leading-21">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem
-              consequuntur? Beatae.
-            </p>
-            <div className="flex items-center font-sans">
-              <a
-                href="/"
-                className="text-custom-red font-bold mt-6 font-sans mr-4"
-              >
-                Donate
-              </a>
-              <a href="/" className="text-custom-red font-bold mt-6 font-sans">
-                Shop
-              </a>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-custom-lightgray text-24 leading-24 font-slab border-b border-custom-lightgray font-light">
+          {data.blocks.map(block => (
+            <div className="p-10 flex flex-col bg-white">
+              <SanityBlockRenderer
+                data={block._rawText}
+                className="text-18 leading-21"
+              />
+              {block.links.map(link => (
+                <a
+                  href={link.url}
+                  className="text-custom-red font-bold mt-6 font-sans"
+                >
+                  {link.text}
+                </a>
+              ))}
             </div>
-          </div>
+          ))}
         </div>
       </div>
-      <div className="col-span-4 text-24 leading-24 font-slab border-r border-b border-custom-lightgray p-6">
-        <div className="twitter-iframe h-full">
+      <div className="col-span-12 lg:col-span-4 text-24 leading-24 font-slab border-r border-b border-custom-lightgray p-6 h-full">
+        <div className="twitter-iframe h-96 lg:h-full">
           <TwitterTimelineEmbed
             sourceType="profile"
             screenName="stateofmattermz"
@@ -116,6 +103,16 @@ export const query = graphql`
         year
         month
         number
+      }
+    }
+    siteSettings: sanitySiteSettings {
+      _rawAboutUsText
+      blocks {
+        _rawText
+        links {
+          text
+          url
+        }
       }
     }
   }

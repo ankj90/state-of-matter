@@ -14,11 +14,19 @@ a {
 }
 
 a:hover {
-  @apply text-custom-red !important;
+  @apply text-custom-red;
+}
+
+a.no-default-style {
+  @apply text-current;
 }
 
 .link-active {
   @apply text-custom-red underline !important;
+}
+
+.tag {
+  @apply bg-gray-100 border-r px-3 mb-2 rounded mr-2;
 }
 
 .menu-link {
@@ -54,4 +62,14 @@ button:focus {
 
 .twitter-iframe > div {
   @apply h-full;
+}
+
+.sidebar-link {
+  @apply pr-5 text-lg whitespace-nowrap;
+}
+
+@screen lg {
+  .sidebar-link {
+    @apply px-0 py-3 text-3xl;
+  }
 }

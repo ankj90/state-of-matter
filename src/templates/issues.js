@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
-import SanityImage from "gatsby-plugin-sanity-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const Issues = ({ data, pageContext }) => {
   const sidebarData = pageContext.years
@@ -20,7 +20,7 @@ const Issues = ({ data, pageContext }) => {
 const HeaderContent = () => {
   return (
     <>
-      <h1 className="text-6xl">Issues</h1>
+      <h1 className="text-36 lg:text-48 leading-42 lg:leading-56">Issues</h1>
     </>
   )
 }
@@ -33,7 +33,7 @@ const SidebarContent = ({ data, activeYear }) => {
         <Link
           key={index}
           to={`/issues/${year}`}
-          className={`px-3 lg:px-0 lg:py-3 ${
+          className={`pr-3 lg:px-0 lg:py-3 ${
             year == activeYear ? "link-active" : ""
           }`}
         >
@@ -46,7 +46,7 @@ const SidebarContent = ({ data, activeYear }) => {
 
 const BodyContent = ({ data }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-10 lg:px-16 py-10">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-8 lg:px-16 lg:py-10">
       {data.map(month => (
         <Issue key={month.id} data={month} />
       ))}
@@ -57,12 +57,10 @@ const BodyContent = ({ data }) => {
 const Issue = ({ data }) => {
   return (
     <a href={`/issue/issue-${data.number}`} className="">
-      {/* <img
-        src={ `https://via.placeholder.com/420x594/222222/444444?text=${data.month}` }
-        alt=""
-        className="w-full h-full"
-      /> */}
-      <SanityImage {...data.image} width={420}></SanityImage>
+      <GatsbyImage
+        image={data.bookCover.asset.gatsbyImageData}
+        width={420}
+      ></GatsbyImage>
     </a>
   )
 }
@@ -79,7 +77,14 @@ export const query = graphql`
           number
           month
           image {
-            ...ImageWithPreview
+            asset {
+              gatsbyImageData
+            }
+          }
+          bookCover {
+            asset {
+              gatsbyImageData
+            }
           }
         }
       }

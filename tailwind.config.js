@@ -26,6 +26,7 @@ module.exports = {
         24: "24px",
         30: "30px",
         36: "36px",
+        48: "48px",
       },
       lineHeight: {
         21: "21px",
@@ -33,6 +34,7 @@ module.exports = {
         28: "28px",
         36: "36px",
         42: "42px",
+        56: "56px",
       },
       fontFamily: {
         sans: [

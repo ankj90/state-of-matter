@@ -4,11 +4,11 @@ import slug from "slug"
 import Layout from "../components/layout"
 import { PostListItem } from "../components/post-list-item"
 
-const Tag = ({ pageContext }) => {
+const Category = ({ pageContext }) => {
   return (
     <Layout
       header={<HeaderContent title={pageContext.name} />}
-      sidebar={<SidebarContent data={pageContext.tags} />}
+      sidebar={<SidebarContent data={pageContext.categories} />}
       body={<BodyContent data={pageContext.posts} />}
     ></Layout>
   )
@@ -24,15 +24,15 @@ const HeaderContent = ({ title }) => {
 
 const SidebarContent = ({ data }) => {
   return (
-    <div className="flex flex-row lg:flex-col -mx-3 lg:mx-0 px-10 lg:px-0 overflow-x-auto">
-      {data.map((tag, index) => (
+    <div className="flex flex-row lg:flex-col -mx-3 lg:mx-0 px-10 lg:px-0">
+      {data.map((c, index) => (
         <Link
-          to={`/tag/${slug(tag)}`}
+          to={`/category/${slug(c)}`}
           activeClassName="link-active"
           className="sidebar-link"
           key={index}
         >
-          {tag}
+          {c}
         </Link>
       ))}
     </div>
@@ -49,4 +49,4 @@ const BodyContent = ({ data }) => {
   )
 }
 
-export default Tag
+export default Category
