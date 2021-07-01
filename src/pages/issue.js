@@ -10,10 +10,6 @@ const Index = ({ pageContext, data }) => {
     editor: data.sanityIssues.editor[0] ? data.sanityIssues.editor : "",
   }
   const posts = data.sanityIssues.posts
-  const tags = posts
-    .map(post => post.tags)
-    .flat()
-    .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i) //Remove duplicates by id
   const categories = posts
     .map(post => post.category)
     .flat()
@@ -21,6 +17,10 @@ const Index = ({ pageContext, data }) => {
 
   const sidebarLinks = [{ id: 0, title: "All" }, ...categories]
   const [activeLink, setActiveLink] = useState(sidebarLinks[0])
+  const postsToDisplay =
+    activeLink.title === "All"
+      ? posts
+      : posts.filter(post => post.category.filter(c => c.id === activeLink.id))
 
   return (
     <Layout
@@ -32,15 +32,7 @@ const Index = ({ pageContext, data }) => {
           setActiveLink={setActiveLink}
         />
       }
-      body={
-        <BodyContent
-          posts={
-            activeLink.title === "All"
-              ? posts
-              : posts.filter(post => post.category.includes(activeLink))
-          }
-        />
-      }
+      body={<BodyContent posts={postsToDisplay} />}
     />
   )
 }

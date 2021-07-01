@@ -11,7 +11,7 @@ export const PostListItem = ({ data }) => {
       <div className="flex flex-col">
         <h2 className="text-3xl md:text-4xl">{data.title}</h2>
         <div className="flex flex-wrap items-center py-1">
-          <Link to={`/author/`} className="tag">
+          <Link to={`/profile/${slug(data.author[0].name)}`} className="tag">
             {data.author[0].name}
           </Link>
         </div>

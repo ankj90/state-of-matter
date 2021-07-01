@@ -46,7 +46,7 @@ const SidebarContent = ({ data, activeYear }) => {
 
 const BodyContent = ({ data }) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 px-8 lg:px-16 lg:py-10">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-10 p-8 lg:px-16 lg:py-10">
       {data.map(month => (
         <Issue key={month.id} data={month} />
       ))}

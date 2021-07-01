@@ -23,7 +23,7 @@ const Profile = ({ data, pageContext }) => {
     ) : (
       <>
         {posts
-          .filter(post => post.category.includes(activeLink))
+          .filter(post => post.category.filter(c => c.id === activeLink.id))
           .map(post => (
             <PostListItem data={post} />
           ))}
@@ -48,15 +48,17 @@ const Profile = ({ data, pageContext }) => {
 const HeaderContent = ({ title }) => {
   return (
     <div>
-      <h1 className="text-5xl text-white">{title}</h1>
+      <h1 className="text-36 lg:text-48 leading-42 lg:leading-56 text-white">
+        {title}
+      </h1>
     </div>
   )
 }
 
 const SidebarContent = ({ buttons, activeLink, setActiveLink }) => {
   return (
-    <div className="flex flex-col">
-      <ul>
+    <div className="flex flex-col -mx-3 lg:mx-0 px-10 lg:px-0 overflow-x-auto">
+      <ul className="flex flex-row lg:flex-col">
         {buttons.map(b => (
           <li className="sidebar-link">
             <button
@@ -74,11 +76,11 @@ const SidebarContent = ({ buttons, activeLink, setActiveLink }) => {
 
 const ProfileBody = ({ data }) => {
   return (
-    <div className="px-8 py-8 lg:p-16 text-30 leading-24">
-      <h2 className="mb-6">{data.name}</h2>
-      <h2>{data.nationality}</h2>
+    <div className="px-8 py-8 lg:p-16">
+      <h2 className="mb-6 text-30 leading-24">{data.name}</h2>
+      <h2 className="text-24 leading-24">{data.nationality}</h2>
       {data._rawBio && (
-        <div className="font-slab mt-16 text-24">
+        <div className="font-slab text-24">
           <SanityBlockRenderer data={data._rawBio} />
         </div>
       )}

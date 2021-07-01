@@ -1,6 +1,7 @@
 import React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import SanityImage from "gatsby-plugin-sanity-image"
+import { modifyObjectFields } from "@graphql-tools/utils"
 const BlockContent = require("@sanity/block-content-to-react")
 export const SanityBlockRenderer = ({ data, className = "" }) => {
   const serializers = {
