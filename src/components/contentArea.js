@@ -5,7 +5,7 @@ const ContentArea = ({ children, hasSidebar }) => {
   return (
     <div
       id=""
-      className={`col-span-12 ${cols} flex flex-col border-gray-300 lg:overflow-y-auto`}
+      className={`col-span-12 ${cols} flex flex-col border-t border-custom-lightgray lg:overflow-y-auto`}
     >
       {children}
     </div>

@@ -4,7 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 const Header = ({ content, ref, isHeaderFullHeight, currentIssue }) => {
   const image = currentIssue.image.asset.gatsbyImageData
   const height = isHeaderFullHeight ? "lg:h-screen" : "h-36"
-  const position = isHeaderFullHeight ? "fixed" : "absolute-important"
+  const position = isHeaderFullHeight ? "fixed-important" : "absolute-important"
   return (
     <header
       className={`relative flex justify-between flex-shrink-0 text-white ${height}  z-10 lg:pl-20 pt-12 lg:pt-0`}

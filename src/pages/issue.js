@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { PostListItem } from "../components/post-list-item"
 import Layout from "../components/layout"
@@ -19,11 +19,28 @@ const Index = ({ pageContext, data }) => {
     .flat()
     .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i) //Remove duplicates by id
 
+  const sidebarLinks = [{ id: 0, title: "All" }, ...categories]
+  const [activeLink, setActiveLink] = useState(sidebarLinks[0])
+
   return (
     <Layout
       header={<HeaderContent data={headData} />}
-      sidebar={<SidebarContent categories={categories} />}
-      body={<BodyContent posts={posts} />}
+      sidebar={
+        <SidebarContent
+          buttons={sidebarLinks}
+          activeLink={activeLink}
+          setActiveLink={setActiveLink}
+        />
+      }
+      body={
+        <BodyContent
+          posts={
+            activeLink.title === "All"
+              ? posts
+              : posts.filter(post => post.category.includes(activeLink))
+          }
+        />
+      }
     />
   )
 }
@@ -31,26 +48,29 @@ const Index = ({ pageContext, data }) => {
 const HeaderContent = ({ data }) => {
   return (
     <>
-      <h1 className="text-6xl">{data.title}</h1>
-      <span className="text-2xl">{data.date}</span>
-      {data.editor[0] && (
-        <span className="text-2xl">{data.editor[0].name}</span>
-      )}
+      <h1 className="text-36 lg:text-48 leading-42 lg:leading-56">
+        {data.title}
+      </h1>
+      <span className="text-24 leading-24">{data.date}</span>
     </>
   )
 }
 
-const SidebarContent = ({ categories }) => {
+const SidebarContent = ({ buttons, activeLink, setActiveLink }) => {
   return (
-    <div className="text-lg lg:text-4xl flex flex-row lg:flex-col -mx-3 lg:mx-0 px-10 lg:px-0">
-      {categories.map(cat => (
-        <div
-          className="cursor-pointer bg-gray-200 lg:bg-white px-3 py-1 lg:px-0 lg:pb-10 mx-2 lg:mx-0 rounded-full lg:rounded-none"
-          key={cat.id}
-        >
-          {cat.title}
-        </div>
-      ))}
+    <div>
+      <ul className="flex flex-row lg:flex-col -mx-3 lg:mx-0 px-10 lg:px-0 overflow-x-auto">
+        {buttons.map(b => (
+          <li className="sidebar-link">
+            <button
+              onClick={() => setActiveLink(b)}
+              className={`${b.id === activeLink.id ? "text-custom-red" : ""}`}
+            >
+              {b.title}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

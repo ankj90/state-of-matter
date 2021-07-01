@@ -54,12 +54,25 @@ const Layout = ({
           }
         }
       }
+      genericPages: allSanityPage {
+        nodes {
+          id
+          title
+          slug {
+            current
+          }
+          subpages {
+            slug
+          }
+        }
+      }
     }
   `)
   const currentIssue = data.currentIssue.nodes[0]
   const categories = data.allSanityCategory.nodes
   const menuData = {
     categories,
+    genericPages: data.genericPages,
     siteSettings: data.siteSettings,
   }
   return (
@@ -100,7 +113,7 @@ const MobileMenu = ({ isOpen, setOpen }) => {
   return (
     <nav className="lg:hidden w-full bg-transparent px-8 py-4 flex justify-between items-center fixed z-40">
       <Link to="/">
-        <h1 className={`text-2xl font-sans font-semibold ${textColor}`}>
+        <h1 className={`text-2xl font-sans ${textColor}`}>
           State of Matter
         </h1>
       </Link>
@@ -150,13 +163,13 @@ const SideMenu = ({
           to="/"
           className="flex justify-center items-center h-1/2 w-full no-default-style"
         >
-          <StateOfMatterSVG className="h-2/3 w-7" />
+          <StateOfMatterSVG className="w-6" />
         </Link>
         <Link
           to={currentIssueLink}
           className="flex justify-center items-center h-1/2 w-full no-default-style"
         >
-          <CurrentIssueSVG className="h-2/3 w-6" />
+          <CurrentIssueSVG className="w-5" />
         </Link>
       </div>
     </div>
@@ -164,6 +177,7 @@ const SideMenu = ({
 }
 
 const FloatingMenu = ({ isOpen, setOpen, data }) => {
+  console.log()
   const links1 = [
     {
       name: "Issues",
@@ -174,30 +188,10 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
     //   href: "/search/",
     // },
   ]
-  const links2 = [
-    {
-      name: "Submit",
-      href: "#",
-    },
-    {
-      name: "Guidelines",
-      href: "#",
-    },
-  ]
-  const links3 = [
-    {
-      name: "Donate",
-      href: "#",
-    },
-    {
-      name: "About",
-      href: "#",
-    },
-    {
-      name: "Contact Us",
-      href: "#",
-    },
-  ]
+  const links2 = data.genericPages.nodes.map(page => ({
+    name: page.title,
+    href: `/${page.slug.current}/${page.subpages[0].slug}`,
+  }))
   const menuClass = isOpen ? "flex" : "hidden"
   const { socialLinks } = data.siteSettings
   return (
@@ -206,7 +200,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
       className={`${menuClass} h-screen lg:ml-20 bg-white absolute top-0 left-0 right-0 shadow flex-col z-30 pt-20 px-8 lg:p-10`}
     >
       <div className="flex flex-col md:flex-row text-xl md:text-5xl font-sans overflow-y-auto">
-        <div className="md:w-1/2 flex-shrink-0 md:border-r border-gray-300 pr-5">
+        <div className="md:w-1/2 flex-shrink-0">
           <ul className="list-none list-inside">
             {data.categories.map((category, index) => (
               <li key={index} className="nav-li">
@@ -216,7 +210,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
               </li>
             ))}
           </ul>
-          <ul className="list-none list-inside mt-10">
+          <ul className="list-none list-inside">
             {links1.map((link, index) => (
               <li key={index} className="nav-li">
                 <a href={link.href}>{link.name}</a>
@@ -224,16 +218,9 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
             ))}
           </ul>
         </div>
-        <div className="md:w-1/2 flex-shrink-0 flex flex-col md:pl-5 mt-10 md:mt-0">
+        <div className="md:w-1/2 flex-shrink-0 flex flex-col md:mt-0">
           <ul className="list-none list-inside">
             {links2.map((link, index) => (
-              <li key={index} className="nav-li">
-                <a href={link.href}>{link.name}</a>
-              </li>
-            ))}
-          </ul>
-          <ul className="list-none list-inside mt-10">
-            {links3.map((link, index) => (
               <li key={index} className="nav-li">
                 <a href={link.href}>{link.name}</a>
               </li>
@@ -250,7 +237,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
                   <a href={link.url}>
                     <GatsbyImage
                       image={link.image.asset.gatsbyImageData}
-                      className="h-6"
+                      className="h-5 md:h-6"
                       objectFit="contain"
                     />
                   </a>
@@ -261,7 +248,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
         </div>
         <a
           href="/privacy"
-          className="text-24 leading-28 text-custom-darkblue mt-5 md:mt-auto md:ml-auto"
+          className="text-18 md:text-24 leading-28 text-custom-darkblue mt-5 md:mt-auto md:ml-auto"
         >
           Privacy Policy
         </a>

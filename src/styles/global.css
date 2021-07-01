@@ -41,12 +41,12 @@ a.no-default-style {
   @apply absolute !important;
 }
 
-.paragraphs p {
-  @apply py-3;
+.fixed-important {
+  @apply fixed !important;
 }
 
 .nav-li {
-  @apply my-3 !important;
+  @apply my-5 !important;
 }
 .nav-link {
   @apply whitespace-nowrap text-custom-darkblue !important;

@@ -79,7 +79,7 @@ const BodyContent = ({ data, scrollRef }) => {
           ))}
         </div>
       </div>
-      <div className="col-span-12 lg:col-span-4 text-24 leading-24 font-slab border-r border-b border-custom-lightgray p-6 h-full">
+      <div className="col-span-12 lg:col-span-4 text-24 leading-24 font-slab border-r lg:border-b border-custom-lightgray p-6 h-full">
         <div className="twitter-iframe h-96 lg:h-full">
           <TwitterTimelineEmbed
             sourceType="profile"

@@ -5,7 +5,7 @@ const Sidebar = ({ children, hasSidebar }) => {
   return (
     <div
       id="home-cat"
-      className={`col-span-12 lg:col-span-3 ${display} flex-col lg:overflow-y-auto py-8 lg:py-8 lg:px-8`}
+      className={`col-span-12 lg:col-span-3 ${display} flex-col lg:overflow-y-auto py-4 lg:py-8 lg:px-8`}
     >
       {children}
     </div>

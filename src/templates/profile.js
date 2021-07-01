@@ -55,10 +55,10 @@ const HeaderContent = ({ title }) => {
 
 const SidebarContent = ({ buttons, activeLink, setActiveLink }) => {
   return (
-    <div className="flex flex-col lg:p-8 text-4xl">
+    <div className="flex flex-col">
       <ul>
         {buttons.map(b => (
-          <li className="mb-10">
+          <li className="sidebar-link">
             <button
               onClick={() => setActiveLink(b)}
               className={`${b.id === activeLink.id ? "text-custom-red" : ""}`}

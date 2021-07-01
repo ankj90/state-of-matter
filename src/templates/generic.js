@@ -28,13 +28,12 @@ const HeaderContent = ({ title }) => {
 
 const SidebarContent = ({ links, subpage }) => {
   return (
-    <div className="text-2xl flex flex-col">
+    <div className="flex flex-row lg:flex-col -mx-3 lg:mx-0 px-10 lg:px-0 overflow-x-auto">
       {links.map(link => (
         <Link
-          to={`/${link.link}`}
-          className={`py-3 hover:text-custom-red ${
-            link.slug === subpage.slug ? "font-bold" : ""
-          }`}
+          to={`/${link.link}/`}
+          className="sidebar-link"
+          activeClassName="link-active"
         >
           {link.title}
         </Link>
@@ -45,7 +44,7 @@ const SidebarContent = ({ links, subpage }) => {
 
 const BodyContent = ({ data }) => {
   return (
-    <div className="border-t border-gray-300 px-10 lg:p-10 text-xl paragraphs">
+    <div className="p-8 lg:p-10 text-xl">
       <SanityBlockRenderer data={data} />
     </div>
   )

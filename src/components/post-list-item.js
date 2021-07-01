@@ -6,7 +6,7 @@ export const PostListItem = ({ data }) => {
   return (
     <a
       href={`/post/${data.slug.current}`}
-      className="flex flex-col xl:flex-row xl:items-end justify-between px-10 xl:px-16 py-5 border-b border-gray-300 hover:shadow-md transition-all duration-300"
+      className="flex flex-col xl:flex-row xl:items-end justify-between px-8 lg:px-10 xl:px-16 py-5 border-b border-gray-300 hover:shadow-md transition-all duration-300"
     >
       <div className="flex flex-col">
         <h2 className="text-3xl md:text-4xl">{data.title}</h2>

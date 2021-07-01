@@ -19,7 +19,7 @@ const Search = ({ data }) => {
     posts.map(post => post.category).flat()
   )
   const years = posts
-    .map(post => post.date.split("-")[0])
+    .map(post => (post.date ? post.date.split("-")[0] : ""))
     .filter(onlyUnique)
     .map((item, index) => ({ id: index, title: item }))
   const [activeTags, setActiveTags] = useState([])
