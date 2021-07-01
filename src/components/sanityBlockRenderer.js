@@ -11,6 +11,18 @@ export const SanityBlockRenderer = ({ data, className = "" }) => {
         </pre>
       ),
       image: props => <SanityImage {...props.node} className="w-full" />,
+      divider: props => (
+        <div
+          className={`h-1 w-32 ${
+            props.node.color ? "" : "bg-custom-lightgray"
+          } mx-auto my-4`}
+          style={
+            props.node.color && {
+              backgroundColor: props.node.color,
+            }
+          }
+        ></div>
+      ),
     },
   }
   const Block = <BlockContent blocks={data} serializers={serializers} />
