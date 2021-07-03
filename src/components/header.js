@@ -3,7 +3,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 const Header = ({ content, ref, isHeaderFullHeight, currentIssue }) => {
   const image = currentIssue.image.asset.gatsbyImageData
-  const height = isHeaderFullHeight ? "lg:h-screen" : "h-36"
+  const height = isHeaderFullHeight ? "lg:h-screen" : "h-auto"
   const position = isHeaderFullHeight ? "fixed-important" : "absolute-important"
   return (
     <header

@@ -9,16 +9,10 @@
 .markdown h1,
 .markdown h2,
 .markdown h3,
-.markdown h4 {
-  color: #111111;
-  font-weight: 400;
-}
-.markdown h1,
-.markdown h2,
-.markdown h3,
 .markdown h4,
-.markdown h5 {
-  @apply mb-6;
+.markdown h5,
+.markdown h6 {
+  @apply mb-6 font-normal font-sans;
 }
 .markdown p {
   margin-top: 1em;

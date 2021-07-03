@@ -20,7 +20,17 @@ const Index = ({ pageContext, data }) => {
   const postsToDisplay =
     activeLink.title === "All"
       ? posts
-      : posts.filter(post => post.category.filter(c => c.id === activeLink.id))
+      : posts.filter(post =>
+          post.category
+            .map(c => c.id === activeLink.id)
+            .reduce((b, c) => c || b)
+        )
+
+  // console.log(
+  //   posts.filter(post =>
+  //     post.category.filter(c => c.title === activeLink.title)
+  //   )
+  // )
 
   return (
     <Layout

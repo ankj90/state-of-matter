@@ -76,7 +76,7 @@ const Layout = ({
     siteSettings: data.siteSettings,
   }
   return (
-    <div className="flex w-full h-screen overflow-y-auto">
+    <div className="flex w-full overflow-y-auto">
       <FloatingMenu isOpen={isOpen} setOpen={setOpen} data={menuData} />
       <SideMenu
         setOpen={setOpen}
@@ -113,9 +113,7 @@ const MobileMenu = ({ isOpen, setOpen }) => {
   return (
     <nav className="lg:hidden w-full bg-transparent px-8 py-4 flex justify-between items-center fixed z-40">
       <Link to="/">
-        <h1 className={`text-2xl font-sans ${textColor}`}>
-          State of Matter
-        </h1>
+        <h1 className={`text-2xl font-sans ${textColor}`}>State of Matter</h1>
       </Link>
 
       <div className={`h-full`}>
@@ -177,7 +175,6 @@ const SideMenu = ({
 }
 
 const FloatingMenu = ({ isOpen, setOpen, data }) => {
-  console.log()
   const links1 = [
     {
       name: "Issues",
