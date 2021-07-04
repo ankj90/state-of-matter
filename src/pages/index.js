@@ -24,6 +24,7 @@ const HeaderContent = ({ currentIssue }) => {
       <Link
         to={`/issue/issue-${currentIssue.number}`}
         className="flex flex-col text-white"
+        style={{ textShadow: "2px 2px #000000" }}
       >
         <h1 className="text-36 leading-42">State Of Matter</h1>
         <div className="flex items-center text-30 leading-36">

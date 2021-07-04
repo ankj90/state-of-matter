@@ -146,7 +146,7 @@ const SideMenu = ({
 
   return (
     <div
-      className={`w-10 md:w-20 h-screen bg-transparent z-20 absolute top-0 bottom-0 left-0 flex-shrink-0 hidden lg:flex flex-col border-r border-custom-red ${color} ${hoverColor} transition-all duration-200 ease-linear`}
+      className={`w-10 md:w-20 h-screen z-20 absolute top-0 bottom-0 left-0 flex-shrink-0 hidden lg:flex flex-col border-r border-custom-red ${color} ${hoverColor} transition-all duration-200 ease-linear`}
     >
       <div className="h-36 flex-shrink-0">
         <button

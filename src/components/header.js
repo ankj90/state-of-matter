@@ -20,7 +20,7 @@ const Header = ({ content, ref, isHeaderFullHeight, currentIssue }) => {
         image={image}
         alt="Header Background Image"
         className={`h-full w-full object-cover z-0 inset-0 ${position}`}
-        style={{ filter: "brightness(50%)" }}
+        style={{ filter: `brightness(${isHeaderFullHeight ? "80%" : "50%"})` }}
       />
     </header>
   )
