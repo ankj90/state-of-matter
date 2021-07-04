@@ -44,12 +44,12 @@ const SidebarContent = ({ data, issueData }) => {
         )} */}
       </div>
       {issueData && issueData.number && (
-        <a
-          href={`/issue/issue-${issueData.number}`}
+        <Link
+          to={`/issue/issue-${issueData.number}`}
           className="text-2xl lg:text-3xl font-light"
         >
           Issue - {issueData.number}
-        </a>
+        </Link>
       )}
       <div className="flex flex-col text-lg lg:text-xl pt-3 lg:pt-5 font-light">
         {data.tags.map(t => (
@@ -60,12 +60,12 @@ const SidebarContent = ({ data, issueData }) => {
       </div>
       {/* <span className="text-xl lg:text-2xl py-3">2074 Words</span> */}
       {data.podcastLink && (
-        <a
-          href={data.podcastLink}
+        <Link
+          to={data.podcastLink}
           className="text-lg lg:text-xl py-3 font-light"
         >
           Listen to this as a podcast
-        </a>
+        </Link>
       )}
     </div>
   )

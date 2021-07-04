@@ -56,12 +56,12 @@ const BodyContent = ({ data }) => {
 
 const Issue = ({ data }) => {
   return (
-    <a href={`/issue/issue-${data.number}`} className="">
+    <Link to={`/issue/issue-${data.number}`} className="">
       <GatsbyImage
         image={data.bookCover.asset.gatsbyImageData}
         width={420}
       ></GatsbyImage>
-    </a>
+    </Link>
   )
 }
 

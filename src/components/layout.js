@@ -76,7 +76,7 @@ const Layout = ({
     siteSettings: data.siteSettings,
   }
   return (
-    <div className="flex w-full overflow-y-auto">
+    <div className="flex w-full h-screen overflow-y-auto">
       <FloatingMenu isOpen={isOpen} setOpen={setOpen} data={menuData} />
       <SideMenu
         setOpen={setOpen}
@@ -180,10 +180,6 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
       name: "Issues",
       href: `/issues/${new Date().getFullYear()}`,
     },
-    // {
-    //   name: "Adv Search",
-    //   href: "/search/",
-    // },
   ]
   const links2 = data.genericPages.nodes.map(page => ({
     name: page.title,
@@ -210,7 +206,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
           <ul className="list-none list-inside">
             {links1.map((link, index) => (
               <li key={index} className="nav-li">
-                <a href={link.href}>{link.name}</a>
+                <Link to={link.href}>{link.name}</Link>
               </li>
             ))}
           </ul>
@@ -219,7 +215,7 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
           <ul className="list-none list-inside">
             {links2.map((link, index) => (
               <li key={index} className="nav-li">
-                <a href={link.href}>{link.name}</a>
+                <Link to={link.href}>{link.name}</Link>
               </li>
             ))}
           </ul>
@@ -231,24 +227,24 @@ const FloatingMenu = ({ isOpen, setOpen, data }) => {
             <ul className="flex items-center">
               {socialLinks.map(link => (
                 <li className="mr-6">
-                  <a href={link.url}>
+                  <Link to={link.url}>
                     <GatsbyImage
                       image={link.image.asset.gatsbyImageData}
                       className="h-5 md:h-6"
                       objectFit="contain"
                     />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <a
-          href="/privacy"
+        <Link
+          to="/privacy"
           className="text-18 md:text-24 leading-28 text-custom-darkblue mt-5 md:mt-auto md:ml-auto"
         >
           Privacy Policy
-        </a>
+        </Link>
       </div>
     </div>
   )

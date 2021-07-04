@@ -23,7 +23,7 @@ const Profile = ({ data, pageContext }) => {
     ) : (
       <>
         {posts
-          .filter(post => post.category.filter(c => c.id === activeLink.id))
+          .filter(post => post.category.some(c => c.id === activeLink.id))
           .map(post => (
             <PostListItem data={post} />
           ))}

@@ -68,12 +68,12 @@ const BodyContent = ({ data, scrollRef }) => {
                 className="text-18 leading-21"
               />
               {block.links.map(link => (
-                <a
-                  href={link.url}
+                <Link
+                  to={link.url}
                   className="text-custom-red font-bold mt-6 font-sans"
                 >
                   {link.text}
-                </a>
+                </Link>
               ))}
             </div>
           ))}
