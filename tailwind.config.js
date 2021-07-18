@@ -71,6 +71,12 @@ module.exports = {
         ],
         serif: ["Georgia", "Cambria", '"Times New Roman"', "Times", "serif"],
       },
+      zIndex: {
+        60: "60",
+      },
+      minHeight: {
+        36: "9rem",
+      },
     },
   },
   variants: {

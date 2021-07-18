@@ -1,6 +1,110 @@
-const { createFilePath } = require("gatsby-source-filesystem")
 var slug = require("slug")
 const path = require("path")
+
+async function createCategoryPages(actions, graphql) {
+  const { createPage } = actions
+  const result = await graphql(`
+    {
+      allSanityPost {
+        group(field: category___title) {
+          edges {
+            node {
+              id
+              title
+              slug {
+                current
+              }
+              author {
+                id
+                name
+              }
+              category {
+                id
+                title
+              }
+              tags {
+                id
+                title
+              }
+            }
+          }
+          fieldValue
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+  const categories = result.data.allSanityPost.group.map(grp => ({
+    name: grp.fieldValue,
+    posts: grp.edges.map(c => c.node),
+  }))
+
+  categories.forEach((c, index) => {
+    createPage({
+      path: path.join("category", slug(c.name.toLowerCase())),
+      component: path.resolve(`./src/templates/category.js`),
+      context: {
+        name: c.name,
+        posts: c.posts,
+        categories: result.data.allSanityPost.group.map(
+          catGrp => catGrp.fieldValue
+        ),
+      },
+    })
+  })
+}
+
+async function createCountryPages(actions, graphql) {
+  const { createPage } = actions
+  const result = await graphql(`
+    query MyQuery {
+      allSanityPost {
+        group(field: author___nationality) {
+          fieldValue
+          nodes {
+            id
+            title
+            slug {
+              current
+            }
+            author {
+              id
+              name
+            }
+            category {
+              id
+              title
+            }
+            tags {
+              id
+              title
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+  const countries = result.data.allSanityPost.group.map(grp => ({
+    name: grp.fieldValue,
+    posts: grp.nodes,
+  }))
+
+  countries.forEach((country, index) => {
+    createPage({
+      path: path.join("country", slug(country.name.toLowerCase())),
+      component: path.resolve(`./src/templates/country.js`),
+      context: {
+        name: country.name,
+        posts: country.posts,
+        countries: result.data.allSanityPost.group.map(grp => grp.fieldValue),
+      },
+    })
+  })
+}
+
 async function createPostPages(actions, graphql) {
   const { createPage } = actions
   const result = await graphql(`
@@ -28,6 +132,52 @@ async function createPostPages(actions, graphql) {
       context: {
         id: node.id,
       },
+    })
+  })
+}
+
+async function createGenericPages(actions, graphql) {
+  const { createPage } = actions
+  const result = await graphql(`
+    query GenericPageQuery {
+      allSanityPage {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+            subpages {
+              slug
+              _key
+              _rawBody
+              title
+            }
+            title
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+  const pages = result.data.allSanityPage.edges
+
+  pages.forEach(({ node }) => {
+    node.subpages.forEach(subpage => {
+      createPage({
+        path: path.join(node.slug.current, subpage.slug),
+        component: path.resolve(`./src/templates/generic.js`),
+        context: {
+          pageTitle: node.title,
+          subpage: subpage,
+          links: node.subpages.map(subpage => ({
+            link: path.join(node.slug.current, subpage.slug),
+            slug: subpage.slug,
+            title: subpage.title,
+          })),
+        },
+      })
     })
   })
 }
@@ -88,48 +238,29 @@ async function createIssueParentPages(actions, graphql) {
   })
 }
 
-async function createGenericPages(actions, graphql) {
+async function createProfilePages(actions, graphql) {
   const { createPage } = actions
   const result = await graphql(`
-    query GenericPageQuery {
-      allSanityPage {
-        edges {
-          node {
-            id
-            slug {
-              current
-            }
-            subpages {
-              slug
-              _key
-              _rawBody
-              title
-            }
-            title
-          }
+    query GenerateProfilePagesQuery {
+      allSanityProfile {
+        nodes {
+          id
+          name
         }
       }
     }
   `)
 
   if (result.errors) throw result.errors
-  const pages = result.data.allSanityPage.edges
+  const profiles = result.data.allSanityProfile.nodes
 
-  pages.forEach(({ node }) => {
-    node.subpages.forEach(subpage => {
-      createPage({
-        path: path.join(node.slug.current, subpage.slug),
-        component: path.resolve(`./src/templates/generic.js`),
-        context: {
-          pageTitle: node.title,
-          subpage: subpage,
-          links: node.subpages.map(subpage => ({
-            link: path.join(node.slug.current, subpage.slug),
-            slug: subpage.slug,
-            title: subpage.title,
-          })),
-        },
-      })
+  profiles.forEach(profile => {
+    createPage({
+      path: path.join("profile", slug(profile.name)),
+      component: path.resolve(`./src/templates/profile.js`),
+      context: {
+        id: profile.id,
+      },
     })
   })
 }
@@ -186,87 +317,6 @@ async function createTagPages(actions, graphql) {
   })
 }
 
-async function createCategoryPages(actions, graphql) {
-  const { createPage } = actions
-  const result = await graphql(`
-    {
-      allSanityPost {
-        group(field: category___title) {
-          edges {
-            node {
-              id
-              title
-              slug {
-                current
-              }
-              author {
-                id
-                name
-              }
-              category {
-                id
-                title
-              }
-              tags {
-                id
-                title
-              }
-            }
-          }
-          fieldValue
-        }
-      }
-    }
-  `)
-
-  if (result.errors) throw result.errors
-  const categories = result.data.allSanityPost.group.map(grp => ({
-    name: grp.fieldValue,
-    posts: grp.edges.map(c => c.node),
-  }))
-
-  categories.forEach((c, index) => {
-    createPage({
-      path: path.join("category", slug(c.name.toLowerCase())),
-      component: path.resolve(`./src/templates/category.js`),
-      context: {
-        name: c.name,
-        posts: c.posts,
-        categories: result.data.allSanityPost.group.map(
-          catGrp => catGrp.fieldValue
-        ),
-      },
-    })
-  })
-}
-
-async function createProfilePages(actions, graphql) {
-  const { createPage } = actions
-  const result = await graphql(`
-    query GenerateProfilePagesQuery {
-      allSanityProfile {
-        nodes {
-          id
-          name
-        }
-      }
-    }
-  `)
-
-  if (result.errors) throw result.errors
-  const profiles = result.data.allSanityProfile.nodes
-
-  profiles.forEach(profile => {
-    createPage({
-      path: path.join("profile", slug(profile.name)),
-      component: path.resolve(`./src/templates/profile.js`),
-      context: {
-        id: profile.id,
-      },
-    })
-  })
-}
-
 exports.createPages = async ({ actions, graphql }) => {
   await createPostPages(actions, graphql)
   await createIssuePages(actions, graphql)
@@ -275,4 +325,5 @@ exports.createPages = async ({ actions, graphql }) => {
   await createTagPages(actions, graphql)
   await createCategoryPages(actions, graphql)
   await createProfilePages(actions, graphql)
+  await createCountryPages(actions, graphql)
 }

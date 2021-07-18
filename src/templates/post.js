@@ -26,16 +26,23 @@ const HeaderContent = ({ title }) => {
 }
 
 const SidebarContent = ({ data, issueData }) => {
-  const author = data.author[0]
+  const author = data.author && data.author[0]
   return (
     <div className="flex flex-col w-full px-8 lg:px-0">
       <div className="flex flex-col">
-        <Link to={`/profile/${slug(author.name)}`}>
-          <h2 className="text-4xl lg:text-5xl lg:mt-10">{author.name}</h2>
-        </Link>
-        <div className="flex flex-col text-2xl lg:text-3xl pt-3 lg:pt-5">
-          <span>{author.nationality}</span>
-        </div>
+        {author && (
+          <>
+            <Link to={`/profile/${slug(author.name)}`}>
+              <h2 className="text-4xl lg:text-5xl lg:mt-10">{author.name}</h2>
+            </Link>
+            <Link
+              to={`/country/${slug(author.nationality)}`}
+              className="flex flex-col text-2xl lg:text-3xl pt-3 lg:pt-5"
+            >
+              <span>{author.nationality}</span>
+            </Link>
+          </>
+        )}
         {/* {author._rawBio && author._rawBio[0] && (
           <SanityBlockRenderer
             data={[author._rawBio[0]]}
@@ -72,7 +79,6 @@ const SidebarContent = ({ data, issueData }) => {
 }
 
 const BodyContent = ({ contentWarning, data }) => {
-  console.log(contentWarning)
   const [isOpen, setOpen] = useState(false)
   return (
     <div className="text-xl px-10 py-8 lg:p-16 font-slab">

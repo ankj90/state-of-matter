@@ -9,7 +9,7 @@ const Body = ({ sidebar, body, hasSidebar = false, isHeaderFullHeight }) => {
     : "overflow-y-auto"
   return (
     <main
-      className={`flex flex-col lg:grid grid-cols-12 h-full z-10 relative lg:ml-20 bg-white ${overflow} pb-8 lg:pb-0`}
+      className={`flex flex-col lg:grid grid-cols-12 h-full z-20 relative lg:ml-20 bg-white ${overflow} pb-8 lg:pb-0`}
     >
       <Sidebar hasSidebar={hasSidebar}>{sidebar}</Sidebar>
       <ContentArea hasSidebar={hasSidebar}>{body}</ContentArea>

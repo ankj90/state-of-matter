@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
-import { CloseButton } from "./icons/CloseButton"
+import { CloseButton } from "./icons/close"
 import Header from "./header"
 import slug from "slug"
-import { useScroll } from "react-use"
 import Body from "./body"
 import { Helmet } from "react-helmet"
-import { MenuButton } from "./icons/MenuButton"
+import { MenuButton } from "./icons/menu"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const Layout = ({

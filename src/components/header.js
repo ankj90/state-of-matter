@@ -7,7 +7,7 @@ const Header = ({ content, ref, isHeaderFullHeight, currentIssue }) => {
   const position = isHeaderFullHeight ? "fixed-important" : "absolute-important"
   return (
     <header
-      className={`relative flex justify-between flex-shrink-0 text-white ${height}  z-10 lg:pl-20 pt-12 lg:pt-0`}
+      className={`relative flex justify-between flex-shrink-0 text-white ${height} min-h-36 z-10 lg:pl-20 pt-12 lg:pt-0`}
       ref={ref}
     >
       <div className="p-8 lg:px-12 flex flex-col z-10 relative justify-center w-full">

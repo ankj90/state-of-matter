@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import slug from "slug"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import { PostListItem } from "../components/post-list-item"
@@ -78,7 +79,13 @@ const ProfileBody = ({ data }) => {
   return (
     <div className="px-8 py-8 lg:p-16">
       <h2 className="mb-6 text-30 leading-24">{data.name}</h2>
-      <h2 className="text-24 leading-24">{data.nationality}</h2>
+      {}
+      <Link
+        to={`/country/${slug(data.nationality)}`}
+        className="text-24 leading-24"
+      >
+        {data.nationality}
+      </Link>
       {data._rawBio && (
         <div className="font-slab text-24">
           <SanityBlockRenderer data={data._rawBio} />
