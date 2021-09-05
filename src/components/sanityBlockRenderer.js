@@ -53,11 +53,14 @@ const Embed = props => {
 }
 
 const CenteredBlock = props => {
-  const { width, boxAlign, textAlign } = props.node
-  const blockWidth = `w-full md:${width}`
+  const { width, boxAlign, textAlign, paddingLeft } = props.node
+  // const blockWidth = `w-full md:${width}`
   const blockMargin = `md:${boxAlign}`
   return (
-    <div className={`${blockWidth} ${blockMargin} ${textAlign}`}>
+    <div
+      className={`${blockMargin} ${textAlign}`}
+      style={{ paddingLeft: paddingLeft }}
+    >
       <SanityBlockRenderer data={props.node.content} />
     </div>
   )
