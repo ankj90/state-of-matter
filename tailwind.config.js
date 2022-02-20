@@ -1,9 +1,20 @@
 module.exports = {
-  purge: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/templates/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-  ],
+  purge: {
+    content: [
+      "./src/pages/**/*.{js,ts,jsx,tsx}",
+      "./src/templates/**/*.{js,ts,jsx,tsx}",
+      "./src/components/**/*.{js,ts,jsx,tsx}",
+    ],
+    safelist: [
+      "mx-auto",
+      "md:mx-auto",
+      "ml-auto",
+      "md:ml-auto",
+      "text-center",
+      "text-left",
+      "text-right",
+    ],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
