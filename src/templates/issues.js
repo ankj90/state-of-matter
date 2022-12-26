@@ -5,7 +5,9 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 const Issues = ({ data, pageContext }) => {
   const sidebarData = pageContext.years
-  const bodyData = data.allSanityIssues.edges.map(edge => edge.node)
+  const bodyData = data.allSanityIssues.edges
+      .map(edge => edge.node)
+      .sort(( a,b ) => parseInt( a.month ) - parseInt( b.month ))
   return (
     <Layout
       header={<HeaderContent />}

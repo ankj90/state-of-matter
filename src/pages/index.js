@@ -96,7 +96,7 @@ const BodyContent = ({ data, scrollRef }) => {
 export const query = graphql`
   query IndexPageQuery {
     currentIssue: allSanityIssues(
-      sort: { fields: [year, month], order: [DESC, DESC] }
+      sort: { fields: number, order: DESC }
       limit: 1
     ) {
       nodes {

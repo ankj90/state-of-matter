@@ -13,7 +13,7 @@ const Index = ({ pageContext, data }) => {
   const categories = posts
     .map(post => post.category)
     .flat()
-    .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i) //Remove duplicates by id
+    .filter((v, i, a) => a.findIndex(t => t.id === v.id) === i); //Remove duplicates by id
 
   const sidebarLinks = [{ id: 0, title: "All" }, ...categories]
   const [activeLink, setActiveLink] = useState(sidebarLinks[0])
