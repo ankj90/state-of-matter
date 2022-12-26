@@ -38,7 +38,7 @@ const Layout = ({
         }
       }
       currentIssue: allSanityIssues(
-        sort: { fields: [year, month], order: [DESC, DESC] }
+        sort: { fields: number, order: DESC }
         limit: 1
       ) {
         nodes {
